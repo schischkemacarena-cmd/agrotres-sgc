@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SGC Documental — Frigorífico Agrotres S.A. (Est. Oficial N.º 5258)</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-badge">AP</div>
+        <div>
+          <h1>Sistema de Gestión Documental — Frigorífico Agrotres S.A.</h1>
+          <p class="subtitle">Establecimiento N.º Oficial 5258 · HACCP, Procedimientos Operativos (PE) y Registros (R)</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button id="btnToggleAudit" class="btn btn-outline" type="button">Auditoría Cruzada (6)</button>
+        <button id="btnExportJson" class="btn btn-outline" type="button">Exportar JSON</button>
+        <button id="btnPrint" class="btn btn-primary" type="button">Imprimir / PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="kpis" id="kpisSection"></section>
+
+    <section class="filters-panel">
+      <div class="search-box">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Buscar por código (PE-06, R-22, M-10), título, sector, responsable o parámetro (82 °C, cloro, cisticercosis, digestor)..."
+          aria-label="Buscar documentos"
+        />
+        <button id="btnClearFilters" class="btn btn-ghost" type="button">Limpiar</button>
+      </div>
+
+      <div class="filter-row">
+        <div class="chip-group" id="categoryChips" role="group" aria-label="Filtrar por categoría">
+          <button class="chip active" data-category="ALL" type="button">Todos (<span id="countAll">0</span>)</button>
+          <button class="chip" data-category="HACCP" type="button">HACCP (<span id="countHaccp">0</span>)</button>
+          <button class="chip" data-category="PE" type="button">Procedimientos PE (<span id="countPe">0</span>)</button>
+          <button class="chip" data-category="Registro" type="button">Registros R (<span id="countReg">0</span>)</button>
+        </div>
+
+        <div class="select-group">
+          <select id="sectorFilter" aria-label="Filtrar por sector">
+            <option value="">Todos los sectores</option>
+          </select>
+
+          <select id="yearFilter" aria-label="Filtrar por vigencia">
+            <option value="">Todas las vigencias</option>
+            <option value="2026">Vigencia 2026</option>
+            <option value="2025">Vigencia 2025</option>
+            <option value="2023">Vigencia 2023</option>
+            <option value="N/D">Sin fecha / Manual</option>
+          </select>
+
+          <select id="sortSelect" aria-label="Ordenar por">
+            <option value="codigo_asc">Orden: Código (A–Z)</option>
+            <option value="vigencia_desc">Vigencia más reciente</option>
+            <option value="vigencia_asc">Vigencia más antigua</option>
+            <option value="titulo_asc">Título (A–Z)</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section id="auditSection" class="audit-panel hidden">
+      <div class="audit-header">
+        <div>
+          <h2>Hallazgos de Auditoría Cruzada del Sistema Documental</h2>
+          <p>Puntos detectados entre HACCP, PE-01 a PE-23 y Registros R-02 a R-28.1 para unificación y revisión.</p>
+        </div>
+        <button id="btnCloseAudit" class="btn btn-ghost" type="button">Ocultar</button>
+      </div>
+      <div id="auditList" class="audit-grid"></div>
+    </section>
+
+    <section class="results-bar">
+      <span id="resultsCount">Mostrando 0 documentos</span>
+      <div class="view-toggle">
+        <button id="viewCards" class="btn btn-sm active" type="button">Tarjetas</button>
+        <button id="viewTable" class="btn btn-sm" type="button">Tabla</button>
+      </div>
+    </section>
+
+    <section id="docsContainer" class="cards-grid"></section>
+  </main>
+
+  <div id="detailModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span id="modalBadge" class="badge"></span>
+          <h2 id="modalTitle"></h2>
+          <p id="modalSubtitle" class="modal-subtitle"></p>
+        </div>
+        <button id="btnCloseModal" class="btn-close" type="button" aria-label="Cerrar">&times;</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>Frigorífico Agrotres S.A. · Establecimiento N.º Oficial 5258</span>
+      <span>Catálogo estático listo para publicar en GitHub Pages (<code>github.io</code>)</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
